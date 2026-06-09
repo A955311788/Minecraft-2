@@ -1,0 +1,20 @@
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+User={{ minecraft_user }}
+Group={{ minecraft_user }}
+WorkingDirectory={{ minecraft_dir }}
+
+ExecStart=/usr/bin/java -Xms1024M -Xmx{{ minecraft_memory }} -jar server.jar nogui
+
+ExecStop=/bin/bash -lc '/usr/local/bin/mcrcon -H 127.0.0.1 -P 25575 -p "{{ rcon_password }}" "save-all" "stop"'
+
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=90
+SuccessExitStatus=0 143
+
+[Install]
+WantedBy=multi-user.target
