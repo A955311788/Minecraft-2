@@ -46,10 +46,10 @@
         dest: /tmp/version_manifest_v2.json
         mode: "0644"
 
-    - name: Get latest Minecraft server download URL
+    - name: Get Minecraft 1.21.4 server download URL
       ansible.builtin.shell: |
         set -e
-        VERSION_URL=$(jq -r '.versions[0].url' /tmp/version_manifest_v2.json)
+        VERSION_URL=$(jq -r '.versions[] | select(.id=="1.21.4") | .url' /tmp/version_manifest_v2.json)
         curl -s "$VERSION_URL" | jq -r '.downloads.server.url'
       args:
         executable: /bin/bash
