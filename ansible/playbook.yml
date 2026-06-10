@@ -6,7 +6,7 @@
   vars:
     minecraft_dir: /opt/minecraft/server
     minecraft_user: minecraft
-    minecraft_memory: 2G
+    minecraft_memory: 1G
     rcon_password: "{{ lookup('env', 'RCON_PASSWORD') }}"
 
   tasks:
